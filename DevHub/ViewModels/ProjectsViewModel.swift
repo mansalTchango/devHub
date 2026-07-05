@@ -25,10 +25,16 @@ class ProjectsViewModel: ObservableObject {
         }
     }
 
-    private let scanPaths = [
-        FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Documents/Perso").path(),
-        FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Documents/vo2").path()
-    ]
+    /// Scan paths configurés par l'utilisateur (ou défaut ~/Documents/ subdirs)
+    private var scanPaths: [String] {
+        persistence.loadScanPaths()
+    }
+
+    func updateScanPaths(_ paths: [String]) {
+        persistence.saveScanPaths(paths)
+        Self.cachedProjects = nil
+        Task { await scan() }
+    }
 
     private let ignoredDirectories: Set<String> = [
         "node_modules", ".git", "build", "DerivedData", "venv",
@@ -56,7 +62,7 @@ class ProjectsViewModel: ObservableObject {
         return result
     }
 
-    /// Groupement 2 niveaux : section (Perso/vo2) → sous-dossier parent → projets
+    /// Groupement 2 niveaux : section (Perso/pro) → sous-dossier parent → projets
     /// Trié par projet le plus récent dans chaque sous-groupe
     var sectionedProjects: [ProjectSection] {
         let bySection = Dictionary(grouping: filteredProjects) { $0.section }

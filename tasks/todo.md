@@ -52,6 +52,26 @@
 - [x] Build Xcode sans erreur
 - [x] Thème sombre cohérent sur tous les modules
 
+---
+
+## Story 12 : Scan Paths Configurables ✅
+**Priorité** : 🟠 Haute
+**Dépend de** : Story 5A
+
+### Tasks
+- [x] PersistenceManager — `scanPaths` dans DevHubData + helpers load/save/default
+- [x] ProjectsViewModel — scan paths depuis PersistenceManager, méthode updateScanPaths
+- [x] Project.section/parentFolder — dynamiques basés sur scan paths matchés
+- [x] RunningProcess.parentFolder — même logique dynamique
+- [x] SettingsView — liste paths, ajout NSOpenPanel, suppression, reset défauts
+- [x] MainView — bouton gear dans navBar → sheet SettingsView
+- [x] ProjectsView — default tab dynamique (premier disponible au lieu de "Perso" hardcodé)
+
+### Critères de validation
+- [x] Build Xcode sans erreur
+
+---
+
 > **⚠️ Note aux agents** : Chaque story a son fichier détaillé dans `tasks/story-{N}-*.md` (ex: `story-1-squelette.md`, `story-3-cleaner.md`). **Toujours lire le fichier story correspondant avant de développer** — il contient les spécifications complètes, contraintes techniques et détails d'implémentation.
 
 ---
@@ -150,7 +170,7 @@
 
 ### Tasks
 - [x] Modèle `Project` + `ProjectType` + `LaunchCommand` + `LaunchEnvironment`
-- [x] Scan ~/Documents/Perso et ~/Documents/vo2 (profondeur max 3)
+- [x] Scan ~/Documents/perso et ~/Documents/pro (profondeur max 3)
 - [x] Détection type projet via fichiers marqueurs
 - [x] Vue avec recherche, filtres type, groupement par dossier
 - [x] Actions : ouvrir VS Code, Terminal, Finder, Xcode

@@ -8,7 +8,7 @@ Vous lancez DevHub, vous voyez vos projets, vos ports, vos process, l'état de v
 
 ## Ce que ça fait
 
-**Gérer vos projets** — DevHub scanne vos dossiers, détecte automatiquement le type de projet (Node, Swift, Python, Rust, Go), affiche la branche git et le statut. Vous lancez vos commandes dev/staging/prod en un clic, directement dans des terminaux intégrés.
+**Gérer vos projets** — DevHub scanne vos dossiers (configurables), détecte automatiquement le type de projet (Node, Swift, Python, Rust, Go), affiche la branche git et le statut. Vous lancez vos commandes dev/staging/prod en un clic, directement dans des terminaux intégrés.
 
 **Surveiller votre machine** — CPU, RAM, disque, batterie en temps réel. Ports TCP ouverts avec le process associé. Kill un port qui bloque en un clic.
 
@@ -72,6 +72,7 @@ DevHub/
     │   ├── Ports/               # Scan ports réseau
     │   ├── DevEnv/              # Environnement dev
     │   ├── System/              # Moniteur système
+    │   ├── Settings/            # Configuration (scan paths, etc.)
     │   └── Theme/HackerTheme.swift  # Design system (couleurs, composants)
     └── Utilities/               # Helpers (calcul taille disque)
 ```
@@ -81,7 +82,7 @@ DevHub/
 - **MVVM** — Chaque module a son ViewModel (`@MainActor ObservableObject`)
 - **ShellService** — Actor Swift unique pour toutes les commandes shell (thread-safe, gestion timeout)
 - **ProcessManager** — Gère les terminaux SwiftTerm, wrapping des commandes avec `nvm use` + `cd`
-- **PersistenceManager** — Sauvegarde JSON dans `~/.devhub/devhub.json` (launch commands, actions custom)
+- **PersistenceManager** — Sauvegarde JSON dans `~/.devhub/devhub.json` (launch commands, actions custom, scan paths)
 - **HackerTheme** — Design system centralisé : palette, modifiers, composants réutilisables
 
 ## Dépendances
@@ -94,8 +95,8 @@ Installé automatiquement via Swift Package Manager à l'ouverture du projet.
 
 ## Chemins scannés
 
-Par défaut, DevHub scanne ces dossiers pour détecter vos projets :
-- `~/Documents/Perso`
-- `~/Documents/vo2`
+Par défaut, DevHub scanne tous les sous-dossiers directs de `~/Documents/` pour détecter vos projets.
+
+Vous pouvez configurer vos propres dossiers de scan via le bouton ⚙ dans la barre de navigation (Settings → ajouter/supprimer des dossiers, reset aux défauts). La configuration est sauvegardée dans `~/.devhub/devhub.json`.
 
 Les projets sont détectés par la présence de `package.json`, `.xcodeproj`, `Cargo.toml`, `go.mod`, `requirements.txt`, etc.

@@ -125,28 +125,33 @@ struct Project: Identifiable {
         return formatter.localizedString(for: lastModified, relativeTo: Date())
     }
 
-    /// Section racine (Perso ou vo2)
+    /// Section racine — nom du dernier composant du scan path matché
+    /// Ex: scan path ~/Documents/Perso, projet ~/Documents/Perso/foo → "Perso"
     var section: String {
-        if path.contains("/Perso/") { return "Perso" }
-        if path.contains("/vo2/") { return "vo2" }
+        let scanPaths = PersistenceManager.shared.loadScanPaths()
+        for scanPath in scanPaths {
+            let marker = scanPath.hasSuffix("/") ? scanPath : scanPath + "/"
+            if path.hasPrefix(marker) || path == scanPath {
+                return (scanPath as NSString).lastPathComponent
+            }
+        }
         return "Autre"
     }
 
-    /// Sous-dossier parent (le nom du projet parent)
-    /// Ex: ~/Documents/Perso/MonProjet/front → "MonProjet"
+    /// Sous-dossier parent entre le scan path et le projet
+    /// Ex: scan path ~/Documents/Perso, projet ~/Documents/Perso/MonProjet/front → "MonProjet"
     var parentFolder: String {
-        let scanRoots = ["/Documents/Perso/", "/Documents/vo2/"]
-        for root in scanRoots {
-            if let range = path.range(of: root) {
-                let relative = String(path[range.upperBound...])
+        let scanPaths = PersistenceManager.shared.loadScanPaths()
+        for scanPath in scanPaths {
+            let marker = scanPath.hasSuffix("/") ? scanPath : scanPath + "/"
+            if path.hasPrefix(marker) {
+                let relative = String(path[marker.endIndex...])
                 let components = relative.split(separator: "/")
-                // Si 2+ composants → le premier est le dossier parent
                 if components.count >= 2 {
                     return String(components[0])
                 }
             }
         }
-        // Projet directement à la racine du scan path
         return ""
     }
 }

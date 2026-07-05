@@ -9,8 +9,8 @@ Scanner et lister tous les projets dev, ouvrir rapidement dans VS Code / Termina
 Lancer des commandes configurables par projet (dev/staging/prod) dans Terminal.
 
 ## Scan paths (fixés)
-- `~/Documents/Perso`
-- `~/Documents/vo2`
+- `~/Documents/perso`
+- `~/Documents/pro`
 
 ## Architecture
 
@@ -50,12 +50,12 @@ DevHub/
 ### Vue
 - Recherche par nom/path
 - Filtre par type (Node.js, Swift, Python, Rust, Go)
-- Groupement par dossier (Perso / vo2)
+- Groupement par dossier (perso / pro)
 - Tri par dernière modification
 - Carte avec hover effect, badge git, date relative
 
 ## Critères de validation
-- [x] Scan trouve les projets dans ~/Documents/Perso et ~/Documents/vo2
+- [x] Scan trouve les projets dans ~/Documents/perso et ~/Documents/pro
 - [x] Type projet détecté correctement
 - [x] Git branch et dirty/clean affichés
 - [x] Ouverture VS Code / Terminal / Finder / Xcode fonctionne

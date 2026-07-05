@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedModule: Module? = nil
+    @State private var showSettings = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -21,6 +22,11 @@ struct MainView: View {
         }
         .frame(minWidth: 800, minHeight: 500)
         .hackerBackground()
+        .sheet(isPresented: $showSettings) {
+            SettingsView { paths in
+                PersistenceManager.shared.saveScanPaths(paths)
+            }
+        }
     }
 
     // MARK: - Nav bar
@@ -49,6 +55,18 @@ struct MainView: View {
             }
 
             Spacer()
+
+            Button {
+                showSettings = true
+            } label: {
+                Image(systemName: "gearshape")
+                    .font(.body)
+                    .foregroundStyle(HackerColors.textSecondary)
+                    .frame(width: 32, height: 32)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help("Settings")
 
             // Module quick-nav
             if selectedModule != nil {

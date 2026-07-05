@@ -3,6 +3,7 @@ import Foundation
 struct DevHubData: Codable {
     var launchCommands: [String: [LaunchCommand]] = [:]
     var customActions: [StoredAction] = []
+    var scanPaths: [String]?
 }
 
 final class PersistenceManager {
@@ -62,6 +63,36 @@ final class PersistenceManager {
         var data = load()
         data.launchCommands[projectPath] = commands
         save(data)
+    }
+
+    // MARK: - Scan Paths
+
+    func loadScanPaths() -> [String] {
+        if let paths = load().scanPaths {
+            return paths
+        }
+        return Self.defaultScanPaths()
+    }
+
+    func saveScanPaths(_ paths: [String]) {
+        var data = load()
+        data.scanPaths = paths.isEmpty ? nil : paths
+        save(data)
+    }
+
+    /// Tous les sous-dossiers directs de ~/Documents/
+    static func defaultScanPaths() -> [String] {
+        let documentsPath = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Documents").path()
+        let fm = FileManager.default
+        guard let contents = try? fm.contentsOfDirectory(atPath: documentsPath) else { return [] }
+        return contents.compactMap { item -> String? in
+            guard !item.hasPrefix(".") else { return nil }
+            let fullPath = (documentsPath as NSString).appendingPathComponent(item)
+            var isDir: ObjCBool = false
+            guard fm.fileExists(atPath: fullPath, isDirectory: &isDir), isDir.boolValue else { return nil }
+            return fullPath
+        }.sorted()
     }
 
     // MARK: - Custom Actions

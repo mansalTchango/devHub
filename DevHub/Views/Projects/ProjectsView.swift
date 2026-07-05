@@ -4,7 +4,7 @@ struct ProjectsView: View {
     @StateObject private var viewModel = ProjectsViewModel()
     @ObservedObject private var processManager = ProcessManager.shared
     @State private var configuringProject: Project? = nil
-    @State private var selectedSection: String = ProjectsView.cachedSection ?? "Perso"
+    @State private var selectedSection: String = ProjectsView.cachedSection ?? ""
     @State private var expandedSubgroups: Set<String> = ProjectsView.cachedExpandedSubgroups ?? []
     @State private var hasInitializedExpansion = ProjectsView.cachedExpandedSubgroups != nil
 
@@ -145,7 +145,7 @@ struct ProjectsView: View {
             }
         }
         .onChange(of: availableSections) { _, sections in
-            if !sections.contains(selectedSection), let first = sections.first {
+            if selectedSection.isEmpty || !sections.contains(selectedSection), let first = sections.first {
                 selectedSection = first
             }
         }

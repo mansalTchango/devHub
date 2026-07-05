@@ -45,12 +45,13 @@ class RunningProcess: Identifiable, ObservableObject {
         self.terminalView = terminalView
     }
 
-    /// Même logique que Project.parentFolder
+    /// Déduit le dossier parent depuis les scan paths configurés
     var parentFolder: String {
-        let scanRoots = ["/Documents/Perso/", "/Documents/vo2/"]
-        for root in scanRoots {
-            if let range = projectPath.range(of: root) {
-                let relative = String(projectPath[range.upperBound...])
+        let scanPaths = PersistenceManager.shared.loadScanPaths()
+        for scanPath in scanPaths {
+            let marker = scanPath.hasSuffix("/") ? scanPath : scanPath + "/"
+            if projectPath.hasPrefix(marker) {
+                let relative = String(projectPath[marker.endIndex...])
                 let components = relative.split(separator: "/")
                 if components.count >= 2 {
                     return String(components[0])
