@@ -1,0 +1,17 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# macOS
+.DS_Store
+
+# Claude Code
+.claude/settings.local.json
+
+# Secrets (prévention)
+.env
+.env.*
+*.pem
+*.key
