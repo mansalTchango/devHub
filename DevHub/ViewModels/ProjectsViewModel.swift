@@ -3,7 +3,12 @@ import SwiftUI
 
 @MainActor
 class ProjectsViewModel: ObservableObject {
+    /// Instance partagée entre fenêtre principale et panneau barre menus
+    static let shared = ProjectsViewModel()
+
     @Published var projects: [Project] = []
+    @Published var pinnedPaths: [String] = []
+    @Published var lastLaunched: [String: Date] = [:]
     @Published var searchText = ""
     @Published var filterType: ProjectType? = nil
     @Published var isScanning = false
@@ -11,6 +16,8 @@ class ProjectsViewModel: ObservableObject {
     private static var cachedProjects: [Project]?
 
     init() {
+        pinnedPaths = PersistenceManager.shared.loadPinnedProjects()
+        lastLaunched = PersistenceManager.shared.loadLastLaunched()
         if let cached = Self.cachedProjects {
             // Recharger les launch commands depuis le JSON
             let savedCommands = PersistenceManager.shared.loadLaunchCommands()
@@ -236,6 +243,49 @@ class ProjectsViewModel: ObservableObject {
             projectName: project.name,
             projectPath: project.path
         )
+        let now = Date()
+        lastLaunched[project.path] = now
+        persistence.markLaunched(projectPath: project.path, at: now)
+    }
+
+    // MARK: - Menu bar (pins + récents)
+
+    func isPinned(_ project: Project) -> Bool {
+        pinnedPaths.contains(project.path)
+    }
+
+    func togglePin(_ project: Project) {
+        if let index = pinnedPaths.firstIndex(of: project.path) {
+            pinnedPaths.remove(at: index)
+        } else {
+            pinnedPaths.append(project.path)
+        }
+        persistence.savePinnedProjects(pinnedPaths)
+    }
+
+    /// Commande lancée par le bouton ▶ : première commande Dev, sinon première commande
+    func defaultCommand(for project: Project) -> LaunchCommand? {
+        project.launchCommands.first { $0.environment == .dev } ?? project.launchCommands.first
+    }
+
+    /// Tri barre menus : épinglés → dernier lancé → lançables → dernière modification
+    func menuBarProjects(matching query: String = "") -> [Project] {
+        let base = query.isEmpty ? projects : projects.filter {
+            $0.name.localizedCaseInsensitiveContains(query) ||
+            $0.path.localizedCaseInsensitiveContains(query)
+        }
+        return base.sorted { a, b in
+            let pinnedA = pinnedPaths.contains(a.path), pinnedB = pinnedPaths.contains(b.path)
+            if pinnedA != pinnedB { return pinnedA }
+            let launchedA = lastLaunched[a.path], launchedB = lastLaunched[b.path]
+            if launchedA != launchedB {
+                return (launchedA ?? .distantPast) > (launchedB ?? .distantPast)
+            }
+            // Projets lançables (commande configurée) avant ceux à configurer
+            let runnableA = !a.launchCommands.isEmpty, runnableB = !b.launchCommands.isEmpty
+            if runnableA != runnableB { return runnableA }
+            return a.lastModified > b.lastModified
+        }
     }
 
     // MARK: - Launch Commands persistence

@@ -4,6 +4,8 @@ struct DevHubData: Codable {
     var launchCommands: [String: [LaunchCommand]] = [:]
     var customActions: [StoredAction] = []
     var scanPaths: [String]?
+    var pinnedProjects: [String]?
+    var lastLaunched: [String: Date]?
 }
 
 final class PersistenceManager {
@@ -93,6 +95,30 @@ final class PersistenceManager {
             guard fm.fileExists(atPath: fullPath, isDirectory: &isDir), isDir.boolValue else { return nil }
             return fullPath
         }.sorted()
+    }
+
+    // MARK: - Menu Bar (pins + récents)
+
+    func loadPinnedProjects() -> [String] {
+        load().pinnedProjects ?? []
+    }
+
+    func savePinnedProjects(_ paths: [String]) {
+        var data = load()
+        data.pinnedProjects = paths
+        save(data)
+    }
+
+    func loadLastLaunched() -> [String: Date] {
+        load().lastLaunched ?? [:]
+    }
+
+    func markLaunched(projectPath: String, at date: Date = Date()) {
+        var data = load()
+        var launched = data.lastLaunched ?? [:]
+        launched[projectPath] = date
+        data.lastLaunched = launched
+        save(data)
     }
 
     // MARK: - Custom Actions

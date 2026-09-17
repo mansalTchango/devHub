@@ -22,6 +22,11 @@ struct MainView: View {
         }
         .frame(minWidth: 800, minHeight: 500)
         .hackerBackground()
+        .onReceive(AppRouter.shared.$requestedModule) { module in
+            guard let module else { return }
+            selectedModule = module
+            AppRouter.shared.requestedModule = nil
+        }
         .sheet(isPresented: $showSettings) {
             SettingsView { paths in
                 PersistenceManager.shared.saveScanPaths(paths)

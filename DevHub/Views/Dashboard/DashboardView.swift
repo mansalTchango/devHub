@@ -5,7 +5,7 @@ struct DashboardView: View {
 
     @StateObject private var portsVM = PortsViewModel()
     @StateObject private var systemVM = SystemViewModel()
-    @StateObject private var projectsVM = ProjectsViewModel()
+    @ObservedObject private var projectsVM = ProjectsViewModel.shared
     @ObservedObject private var processManager = ProcessManager.shared
 
     @State private var sessionStart = Date()

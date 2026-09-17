@@ -4,6 +4,36 @@
 
 ---
 
+## Story 13 : Barre menus — Run projets (P1) 🚧
+**Priorité** : 🟠 Haute
+**Dépend de** : Story 5A, 5B, 12
+
+Décisions validées : fermer fenêtre garde process vivants (Quit les tue) · look natif blur + accents verts · icône Dock gardée · P1 d'abord, P2/P3 ensuite.
+
+### Tasks P1
+- [x] PersistenceManager — `pinnedProjects` + `lastLaunched` (optionnels, rétro-compat JSON)
+- [x] ProjectsViewModel — instance partagée `.shared`, pin/unpin, `lastLaunched`, `defaultCommand`, tri menu
+- [x] AppRouter — navigation fenêtre principale depuis barre menus
+- [x] RunningProcess.status → republie ProcessManager (badge compteur live)
+- [x] DevHubApp — `Window(id: "main")` + `MenuBarExtra` style `.window`, retrait `stopAll` à fermeture fenêtre
+- [x] Views/MenuBar — MenuBarPanel, MenuBarProjectRow, MenuBarRunningRow, MenuBarLabel
+- [x] xcodegen generate + build
+
+### Critères de validation
+- [x] Build Xcode sans erreur
+- [x] Icône barre menus visible, panneau s'ouvre (vérifié par capture, build Debug)
+- [ ] ▶ lance commande par défaut, process apparaît dans "En cours" + onglet Processes
+- [ ] Fermer fenêtre → process toujours vivants ; Quit → tués
+- [ ] Épingler persiste après relance
+
+### Backlog P2 / P3
+- [ ] LaunchSuggester — commande auto selon type projet (scripts package.json, swift run, cargo run…)
+- [ ] Hotkey global (Carbon `RegisterEventHotKey`)
+- [ ] Tuiles : Kill port, Quick Actions favorites, mini CPU/RAM
+- [ ] Plus tard : notif crash process, groupes (stack en 1 clic), lien localhost:port, launch at login
+
+---
+
 ## Story 11 : Optimisation Terminaux (onglet Processes) ✅
 **Priorité** : 🟠 Haute
 **Dépend de** : Story 5B, Story 10

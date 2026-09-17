@@ -6,6 +6,7 @@ enum ProjectType: String, CaseIterable, Codable {
     case python = "Python"
     case rust = "Rust"
     case go = "Go"
+    case csharp = "C#"
     case unknown = "Autre"
 
     var icon: String {
@@ -15,6 +16,7 @@ enum ProjectType: String, CaseIterable, Codable {
         case .python: return "fossil.shell"
         case .rust: return "gearshape"
         case .go: return "hare"
+        case .csharp: return "number"
         case .unknown: return "questionmark.folder"
         }
     }
@@ -26,6 +28,7 @@ enum ProjectType: String, CaseIterable, Codable {
         case .python: return .blue
         case .rust: return .brown
         case .go: return .cyan
+        case .csharp: return .purple
         case .unknown: return .gray
         }
     }
@@ -38,6 +41,7 @@ enum ProjectType: String, CaseIterable, Codable {
         case .python: return ["requirements.txt", "pyproject.toml", "setup.py"]
         case .rust: return ["Cargo.toml"]
         case .go: return ["go.mod"]
+        case .csharp: return []
         case .unknown: return []
         }
     }
@@ -46,6 +50,7 @@ enum ProjectType: String, CaseIterable, Codable {
     var markerPatterns: [String] {
         switch self {
         case .swift: return [".xcodeproj", ".xcworkspace"]
+        case .csharp: return [".csproj", ".sln"]
         default: return []
         }
     }

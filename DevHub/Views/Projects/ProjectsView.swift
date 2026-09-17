@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProjectsView: View {
-    @StateObject private var viewModel = ProjectsViewModel()
+    @ObservedObject private var viewModel = ProjectsViewModel.shared
     @ObservedObject private var processManager = ProcessManager.shared
     @State private var configuringProject: Project? = nil
     @State private var selectedSection: String = ProjectsView.cachedSection ?? ""

@@ -18,6 +18,7 @@
 		3BF09D9221A95B9C31280A0E /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = 59DFF32354C1632FA280C86B /* SwiftTerm */; };
 		3F347965B56A638CBA62163F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = C382F5189977662B75CAB560 /* Project.swift */; };
 		4168DFED4E52AE0844A85910 /* ProcessManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D8D5984F6B4B48B469A58 /* ProcessManagerViewModel.swift */; };
+		4194881DE6F34896FAD0B907 /* MenuBarPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C27EE403E46C98C606E98 /* MenuBarPanel.swift */; };
 		4404DE65A27CB5325DF8E118 /* ShellService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325DEF20C574D5EECFD32432 /* ShellService.swift */; };
 		472BCD0F6C182BD43A825B90 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1F2367B40266384379D4B /* MainView.swift */; };
 		486A5110D097DABB5E51A3DB /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D8D06D629855E2B233FDF4 /* PlaceholderView.swift */; };
@@ -27,6 +28,7 @@
 		502C8E3C66034E70DC1FC3F2 /* DevHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B56FFBC46DD1B8F19E0CBB8 /* DevHubApp.swift */; };
 		534BE6C4D052E3E866A54765 /* TerminalPaneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC258D088E0971BCD826E6A /* TerminalPaneState.swift */; };
 		54B6F8F937C0932A375C848F /* CleanerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D809A626F97A71746DB7CA /* CleanerViewModel.swift */; };
+		5C09CA0707312BD8D0F8AFC6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE490EFAADE93638BD494ACE /* AppRouter.swift */; };
 		5E7A9730693F5083BDA4A2C3 /* TerminalViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D239B6376F1A26AAFAEDA /* TerminalViewWrapper.swift */; };
 		65BA6BCAE5C2EACBA9D10FD7 /* QuickActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060C660B08DDB74DC42314ED /* QuickActionsViewModel.swift */; };
 		6AB149E613B9AFEB9CCE6FA6 /* EnhancedTerminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE7EDE7A6EAC9B6DA73B0F2 /* EnhancedTerminalView.swift */; };
@@ -55,6 +57,7 @@
 		F379CEAA4D1FE83459DE17B7 /* CleanerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2040C51FD9EE859DBA6B3 /* CleanerView.swift */; };
 		FB6D144600F72AE8363870B8 /* RunningProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053249FAC2FAD1EE02AAA4D2 /* RunningProcess.swift */; };
 		FE16DE014A20E9FD2E7F47B4 /* ResizableTerminalGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2D40009FC253984089E5D /* ResizableTerminalGrid.swift */; };
+		FF13C79466450EC7E68657C7 /* MenuBarRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435A08A41F9EF26DA40F74B /* MenuBarRows.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,9 +102,12 @@
 		C8417F21E0831775C938AE6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF4096CEF230C3685657BC29 /* DiskSizeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskSizeCalculator.swift; sourceTree = "<group>"; };
 		D3DC7BE9BAB393CC7EF7D382 /* MetricCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCard.swift; sourceTree = "<group>"; };
+		D435A08A41F9EF26DA40F74B /* MenuBarRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarRows.swift; sourceTree = "<group>"; };
 		D5D809A626F97A71746DB7CA /* CleanerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanerViewModel.swift; sourceTree = "<group>"; };
 		DE27377DC313354786B83557 /* TerminalToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalToolbar.swift; sourceTree = "<group>"; };
+		DE490EFAADE93638BD494ACE /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		E36D239B6376F1A26AAFAEDA /* TerminalViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewWrapper.swift; sourceTree = "<group>"; };
+		E70C27EE403E46C98C606E98 /* MenuBarPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPanel.swift; sourceTree = "<group>"; };
 		E98A38D3B9E88CCBFDE3CDF5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EAE7EDE7A6EAC9B6DA73B0F2 /* EnhancedTerminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedTerminalView.swift; sourceTree = "<group>"; };
 		EB24CEF21891D5FC5A3F6EB2 /* DevTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTool.swift; sourceTree = "<group>"; };
@@ -124,11 +130,21 @@
 		1498B8CB7401A474BA008ADD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DE490EFAADE93638BD494ACE /* AppRouter.swift */,
 				C5097EE94B32436D609DE19F /* PersistenceManager.swift */,
 				949D29A96C0C47E90139BF6F /* ProcessManager.swift */,
 				325DEF20C574D5EECFD32432 /* ShellService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		1CA1CEC0B4A499846842940E /* MenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				E70C27EE403E46C98C606E98 /* MenuBarPanel.swift */,
+				D435A08A41F9EF26DA40F74B /* MenuBarRows.swift */,
+			);
+			path = MenuBar;
 			sourceTree = "<group>";
 		};
 		22B080E3F9DF6D045290474B /* Models */ = {
@@ -171,6 +187,7 @@
 				CE7AF08C3072D1A9E06DB8B3 /* Cleaner */,
 				FB57C6B76FDB37139B1FF5F2 /* Dashboard */,
 				EE4E8C08A18DAF3B8B9CF1E7 /* DevEnv */,
+				1CA1CEC0B4A499846842940E /* MenuBar */,
 				D4E25FA0E92AD140ABAED50D /* Placeholders */,
 				F0946B4F31AF0494D8B00995 /* Ports */,
 				E1F7C627BB512C4FE6A49070 /* Processes */,
@@ -402,6 +419,7 @@
 			files = (
 				79A2B3B181AD9CB30671C9B2 /* ActionButton.swift in Sources */,
 				1D5BAB72FE8ACEECA9811D04 /* AddActionSheet.swift in Sources */,
+				5C09CA0707312BD8D0F8AFC6 /* AppRouter.swift in Sources */,
 				F379CEAA4D1FE83459DE17B7 /* CleanerView.swift in Sources */,
 				54B6F8F937C0932A375C848F /* CleanerViewModel.swift in Sources */,
 				6B6ECCB37A5F88018AAD96E8 /* CleaningTask.swift in Sources */,
@@ -416,6 +434,8 @@
 				DDB94F844DAFD20FF8B2235E /* GaugeWidget.swift in Sources */,
 				C8FD59D80D9A43D951D07D79 /* HackerTheme.swift in Sources */,
 				472BCD0F6C182BD43A825B90 /* MainView.swift in Sources */,
+				4194881DE6F34896FAD0B907 /* MenuBarPanel.swift in Sources */,
+				FF13C79466450EC7E68657C7 /* MenuBarRows.swift in Sources */,
 				83BA8B6A84609231655E6E94 /* MetricCard.swift in Sources */,
 				F0FACFF621E0F02F0050E6CC /* Module.swift in Sources */,
 				0A6173B8B22834F569B2B2E8 /* PersistenceManager.swift in Sources */,

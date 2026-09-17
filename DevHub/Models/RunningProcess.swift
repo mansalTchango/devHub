@@ -27,7 +27,10 @@ class RunningProcess: Identifiable, ObservableObject {
     let terminalView: EnhancedTerminalView
     let paneState = TerminalPaneState()
 
-    @Published var status: ProcessStatus = .running
+    @Published var status: ProcessStatus = .running {
+        // Republie le manager : compteurs (barre menus, dashboard) suivent les changements de statut
+        didSet { ProcessManager.shared.objectWillChange.send() }
+    }
     @Published var exitCode: Int32?
 
     init(

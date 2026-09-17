@@ -45,7 +45,7 @@ class ProcessManager: ObservableObject {
         terminalView.processDelegate = delegate
         objc_setAssociatedObject(terminalView, &AssociatedKeys.delegate, delegate, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 
-        var env = ProcessInfo.processInfo.environment
+        var env = ShellEnvironment.resolved
         let nodeModulesBin = (projectPath as NSString).appendingPathComponent("node_modules/.bin")
         let home = NSHomeDirectory()
         let pnpmBin = "\(home)/Library/pnpm"
